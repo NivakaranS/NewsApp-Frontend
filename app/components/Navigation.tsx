@@ -76,7 +76,9 @@ const Navigation = () => {
 
                         {cookieValue ?
                         <div>
-                            <pre>{cookieValue}</pre>
+                            <div className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
+                                <p>Logout</p>
+                            </div>
                         </div>
                         :
                         <Link href="/login">
