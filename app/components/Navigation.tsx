@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Bell from '../images/bell.png';
 import Search from '../images/search.png';
 import Link from 'next/link';
@@ -9,9 +9,15 @@ import { Chokokutai } from 'next/font/google';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
+    const [cookieValue, setCookieValue] = useState<any>(null)
 
-    const cookies = document.cookie;
-    console.log(cookies)
+    useEffect(() => {
+        if(typeof document !== 'undefined') {
+            const cookies = document.cookie;
+            console.log(cookies)
+            setCookieValue(cookies);
+        }
+    }, [])
 
     const parseCookies = () => {
         const cookiesObj: { [key: string]: string } = {};
@@ -62,9 +68,9 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {cookies ?
+                        {cookieValue ?
                         <div>
-                            <p>{cookies}</p>
+                            <p>{cookieValue}</p>
                         </div>
                         :
                         <Link href="/login">
