@@ -9,7 +9,7 @@ import { Chokokutai } from 'next/font/google';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
-    const [cookieValue, setCookieValue] = useState<any>(null)
+    const [cookieValue, setCookieValue] = useState<{[key: string]: string} | null>(null)
 
     useEffect(() => {
         const parseCookies = () => {
@@ -17,8 +17,10 @@ const Navigation = () => {
     
             document.cookie.split(';').forEach(cookie => {
                 const [key, value] = cookie.trim().split('=');
-                cookiesObj[key] = value;
-            })
+                if(key && value !== undefined) {
+                    cookiesObj[key] = decodeURIComponent(value);
+                }
+            });
     
             return cookiesObj;
         }
@@ -27,7 +29,7 @@ const Navigation = () => {
 
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
-            if(cookies == "") {
+            if(cookies === "") {
                 setCookieValue(null)
             }
             else {
@@ -38,18 +40,27 @@ const Navigation = () => {
             
             
         }
-
-        
-
     }, [])
 
-    const handleLogout = () => {
-        console.log("Logged out")
-        if(typeof document !== 'undefined') {
-            
-            document.cookie = "";
-            setCookieValue(null)
+    const handleLogout = async () => {
+
+        try {
+            await fetch("https://news-app-backend-4rb1.vercel.app/auth/logout", {
+                method: 'GET',
+                credentials: 'include'
+            })
+
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+            setCookieValue(null);
+        } catch(error) {
+            console.error("Error in logging out: ", error)
         }
+
+        // console.log("Logged out")
+        // if(typeof document !== 'undefined') {
+        //     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+        //     setCookieValue(null);
+        // }
     }
 
     
@@ -92,11 +103,11 @@ const Navigation = () => {
                         </div>
 
                         {cookieValue ?
-                        <a  href="https://news-app-backend-4rb1.vercel.app/auth/logout">
+                        
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
                             </div>
-                        </a>
+                        
                         :
                         <Link href="/login">
                             <div className="bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black">
