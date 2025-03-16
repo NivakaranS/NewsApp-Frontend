@@ -12,7 +12,11 @@
     "axios": "^1.8.2",
     "next": "15.2.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-select": "^5.10.1",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.6",
+    "tailwind-scrollbar-hide": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

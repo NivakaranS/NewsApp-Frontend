@@ -9,7 +9,7 @@ import { useState } from "react";
 
 
 export default function Home() {
-  const [search, setSearch] = useState(false);
+  const [login, setLogin] = useState(false);
   return (
     <div >
       <Navigation />

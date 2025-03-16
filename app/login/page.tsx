@@ -1,10 +1,56 @@
-
+'use client'
 
 import React from 'react'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
+import { login } from '../services/getUsers'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const router = useRouter();
+
+    const handleLogin = async () => {
+        
+
+        try {
+            const data = {
+                email: email,
+                password: password
+            }
+            const response = await login(data);
+            console.log(response.type);
+            
+            if(response.type == 'admin') {
+                console.log("Admin here")
+                router.push('/admin')
+            }
+            else if(response.type == 'user') {
+                router.push('/user')
+            }
+            
+        } catch(err) {
+            console.error("Error in login: ", err)
+        } finally {
+            setEmail('');
+            setPassword('');
+        }
+    }
+
+    const handleEmailChange = (e: any) => {
+        console.log(e.currentTarget.value);
+        setEmail(e.currentTarget.value);
+
+    }
+
+    const handlePasswordChange = (e: any) => {
+        console.log(e.currentTarget.value);
+        setPassword(e.currentTarget.value);
+    }
+
     return(
         <div>
             
@@ -17,17 +63,17 @@ const Login = () => {
                         </div>
                         <div className='flex flex-col w-[100%] items-center justify-center'>
                             <div className='flex flex-col w-[40%]'>
-                                <label className='relative'>Username</label>
-                                <input placeholder='' className='bg-white rounded-[5px] ring-[0.5px] focus:outline-none px-[14px] w-[300px]] py-[5px]'/>
+                                <label className='relative'>Email</label>
+                                <input value={email} placeholder='' onChange={handleEmailChange} className='bg-white rounded-[5px] ring-[0.5px] focus:outline-none px-[14px] w-[300px]] py-[5px]'/>
                             </div>
                         </div>
                         <div className='flex flex-col w-[100%] mt-[10px] items-center justify-center'>
                             <div className='flex flex-col w-[40%]'>
                                 <label className='relative'>Password</label>
-                                <input placeholder='' className='bg-white rounded-[5px] ring-[0.5px] focus:outline-none px-[14px] w-[300px]] py-[5px]'/>
+                                <input value={password} onChange={handlePasswordChange} placeholder='' className='bg-white rounded-[5px] ring-[0.5px] focus:outline-none px-[14px] w-[300px]] py-[5px]'/>
                             </div>
                         </div>
-                        <div className='bg-gray-800 text-white w-[40%] rounded-[5px] mt-[10px] flex items-center justify-center py-[7px] cursor-pointer'>
+                        <div onClick={handleLogin} className='bg-gray-800 text-white w-[40%] rounded-[5px] mt-[10px] flex items-center justify-center py-[7px] cursor-pointer'>
                             <p>Login</p>
                         </div>
                     </div>
