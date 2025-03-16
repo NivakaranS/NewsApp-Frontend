@@ -27,7 +27,7 @@ const Navigation = () => {
 
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
-            if(cookies == null) {
+            if(cookies == "") {
                 setCookieValue(null)
             }
             else {
