@@ -1,7 +1,6 @@
 
 import Profile from '../images/profile5.png'
 import Image from 'next/image';
-import Bed from '../images/aii.jpg'
 
 
 import Select from 'react-select';

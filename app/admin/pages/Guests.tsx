@@ -2,8 +2,6 @@
 
 
 
-import Image from "next/image"
-import Bed from '../images/aii.jpg'
 import React, {useEffect, useState} from "react"
 import {createNews} from "../../services/getNews"
 import { getAllNewsCategory } from "../../services/getNewsCategory";
@@ -20,7 +18,7 @@ const Guests = () => {
     const [newsCategories, setNewsCategories] = useState<any[]>([])
     const [newsCategoryTitle, setNewsCategoryTitle] = useState<string>("")
     const [newsCategoryImageUrl, setNewsCategoryImageUrl] = useState<string>("")
-    const [refreshTrigger, setRefreshTrigger] = useState<number>(0)
+
     const [file, setFile] = useState<File | null>(null)
     const [preview, setPreview] = useState<string | null>(null)
 
@@ -29,6 +27,7 @@ const Guests = () => {
         if (selectedFile) {
             setFile(selectedFile);
             setPreview(URL.createObjectURL(selectedFile));
+            console.log(preview)
         }
     }
 
@@ -48,6 +47,7 @@ const Guests = () => {
                     "Content-Type": "multipart/form-data"
                 }
             });
+            console.log(response)
 
             setFile(null);
             setPreview(null);
@@ -69,7 +69,7 @@ const Guests = () => {
     useEffect(() => {
         
         fetchNewsCategory()
-        }, [newsCategoryTitle, newsCategoryImageUrl, refreshTrigger]);
+        }, [newsCategoryTitle, newsCategoryImageUrl]);
 
     
     const addNewsCategory = async () => {

@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import Navigation from '../components/Navigation'
-import Footer from '../components/Footer'
+
 import { login } from '../services/getUsers'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

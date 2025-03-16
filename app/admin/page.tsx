@@ -1,9 +1,9 @@
 'use client'
-import Image from "next/image";
+
 import Navigation from "./components/Navigation";
 import TopNavigation from "./components/TopNavigation";
 import Rooms from "./pages/Rooms"; // Fixed import
-import Falcon from "./components/Falcon";
+
 import { useState } from "react";
 import Restuarant from "./pages/Restuarant";
 import Dashboard from "./pages/Home";
@@ -65,7 +65,7 @@ export default function Home() {
       )
         }
       </div>
-      <Falcon />
+      
     </div>
   );
 }

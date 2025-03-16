@@ -1,7 +1,7 @@
 
 'use client';
 import React, {useEffect, useState} from "react";
-import { getNews, getNewsByCategory } from "../services/getNews";
+import { getNewsByCategory } from "../services/getNews";
 
 const CategorySummary1 = () => {
 

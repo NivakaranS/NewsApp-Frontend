@@ -1,8 +1,7 @@
 'use client'
-import Image from "next/image"
+
 import React from "react"
-import Codebug from '../images/codebugfinal7.png'
-import { useState } from "react"
+
 type NavigationProps = {
   handleNavClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   navClick: string;
