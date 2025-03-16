@@ -19,18 +19,21 @@ const Navigation = () => {
             const cookiesObj = parseCookies();
             setCookieValue(cookiesObj);
         }
+
+        const parseCookies = () => {
+            const cookiesObj: { [key: string]: string } = {};
+    
+            document.cookie.split(';').forEach(cookie => {
+                const [key, value] = cookie.trim().split('=');
+                cookiesObj[key] = value;
+            })
+    
+            return cookiesObj;
+        }
+
     }, [])
 
-    const parseCookies = () => {
-        const cookiesObj: { [key: string]: string } = {};
-
-        document.cookie.split(';').forEach(cookie => {
-            const [key, value] = cookie.trim().split('=');
-            cookiesObj[key] = value;
-        })
-
-        return cookiesObj;
-    }
+    
 
     
 
@@ -71,7 +74,7 @@ const Navigation = () => {
 
                         {cookieValue ?
                         <div>
-                            <p>{cookieValue}</p>
+                            <pre>{JSON.stringify(cookieValue, null, 2)}</pre>
                         </div>
                         :
                         <Link href="/login">
