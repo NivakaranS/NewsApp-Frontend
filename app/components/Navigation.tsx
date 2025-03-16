@@ -15,7 +15,9 @@ const Navigation = () => {
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
             console.log(cookies)
-            setCookieValue(cookies);
+            
+            const cookiesObj = parseCookies();
+            setCookieValue(cookiesObj);
         }
     }, [])
 
@@ -33,8 +35,7 @@ const Navigation = () => {
     
 
     
-    const cookiesObj = parseCookies();
-    console.log(cookiesObj)
+    
 
 
     return (
