@@ -23,12 +23,20 @@ const Navigation = () => {
             return cookiesObj;
         }
         
+
+
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
+            if(cookies == null) {
+                setCookieValue(null)
+            }
+            else {
+                const cookiesObj = parseCookies();
+                setCookieValue(cookiesObj);
+            }
             console.log(cookies)
             
-            const cookiesObj = parseCookies();
-            setCookieValue(cookiesObj);
+            
         }
 
         
