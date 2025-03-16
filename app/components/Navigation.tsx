@@ -5,7 +5,7 @@ import Bell from '../images/bell.png';
 import Search from '../images/search.png';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Chokokutai } from 'next/font/google';
+import axios from 'axios';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
@@ -43,15 +43,15 @@ const Navigation = () => {
     const handleLogout = async () => {
 
         try {
-            await fetch("https://news-app-backend-4rb1.vercel.app/auth/logout", {
-                method: 'GET',
-                credentials: 'include'
+            await axios.get("https://news-app-backend-4rb1.vercel.app/auth/logout", {
+                withCredentials: true
             })
 
             if(typeof document !== 'undefined') {
                 document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
             }
-            setTimeout(() => setCookieValue(null), 100);
+            
+            setCookieValue(null)
 
         } catch(error) {
             console.error("Error in logging out: ", error)
@@ -103,7 +103,7 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {cookieValue ?
+                        {(cookieValue !== null) ?
                         
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
