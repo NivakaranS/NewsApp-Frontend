@@ -48,8 +48,11 @@ const Navigation = () => {
                 credentials: 'include'
             })
 
-            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+            if(typeof document !== 'undefined') {
+                document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+            }
             setTimeout(() => setCookieValue(null), 100);
+
         } catch(error) {
             console.error("Error in logging out: ", error)
         }
