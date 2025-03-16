@@ -32,13 +32,9 @@ const Navigation = () => {
 
 
         if(typeof document !== 'undefined') {
-            const cookies = document.cookie;
         
-            if (cookies) {
-                const cookiesObj = parseCookies();
-                setCookieValue(cookiesObj);
-            }
-            console.log(cookies)
+            const cookiesObj = parseCookies();
+            setCookieValue(cookiesObj);
             
             
         }
@@ -104,7 +100,7 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {cookieValue && cookieValue.session ?
+                        {cookieValue ?
                         
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
