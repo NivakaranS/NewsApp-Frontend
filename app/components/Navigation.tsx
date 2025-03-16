@@ -28,7 +28,7 @@ const Navigation = () => {
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
             
-            if(cookies == "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;") {
+            if(cookies == "") {
                 setCookieValue(null)
             }
             else {
