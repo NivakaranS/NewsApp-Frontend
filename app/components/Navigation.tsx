@@ -14,6 +14,7 @@ const Navigation = () => {
 
     useEffect(() => {
         setCookieValue(getCookie("session"));
+        console.log(cookieValue)
     }, []);
 
     
