@@ -12,14 +12,6 @@ const Navigation = () => {
     const [cookieValue, setCookieValue] = useState<any>(null)
 
     useEffect(() => {
-        if(typeof document !== 'undefined') {
-            const cookies = document.cookie;
-            console.log(cookies)
-            
-            const cookiesObj = parseCookies();
-            setCookieValue(cookiesObj);
-        }
-
         const parseCookies = () => {
             const cookiesObj: { [key: string]: string } = {};
     
@@ -30,6 +22,16 @@ const Navigation = () => {
     
             return cookiesObj;
         }
+        
+        if(typeof document !== 'undefined') {
+            const cookies = document.cookie;
+            console.log(cookies)
+            
+            const cookiesObj = parseCookies();
+            setCookieValue(cookiesObj);
+        }
+
+        
 
     }, [])
 
