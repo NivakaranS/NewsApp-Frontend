@@ -27,7 +27,8 @@ const Navigation = () => {
 
         if(typeof document !== 'undefined') {
             const cookies = document.cookie;
-            if(cookies == null) {
+            
+            if(cookies == "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;") {
                 setCookieValue(null)
             }
             else {
@@ -46,8 +47,9 @@ const Navigation = () => {
     const handleLogout = () => {
         console.log("Logged out")
         if(typeof document !== 'undefined') {
-            setCookieValue(null)
+            
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            setCookieValue(null)
         }
     }
 
