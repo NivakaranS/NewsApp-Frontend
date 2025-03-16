@@ -46,6 +46,7 @@ const Navigation = () => {
     const handleLogout = () => {
         console.log("Logged out")
         if(typeof document !== 'undefined') {
+            setCookieValue(null)
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         }
     }
