@@ -7,7 +7,9 @@ const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 export async function getUsers() {
     try {
-        const response = await axios.get(BASE_URL + '/users');
+        const response = await axios.get(BASE_URL + '/users', {
+            withCredentials: true
+        });
     console.log(response.data);
     return response.data;
     } catch (error) {
@@ -21,7 +23,7 @@ export async function login(data: any) {
         const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/login", {
             email: data.email,
             password: data.password
-        });
+        }, { withCredentials: true });
 
         console.log(response.data);
         return response.data;
@@ -47,7 +49,7 @@ export async function createUser(data: any) {
             password: data.password,
             gender: data.gender,
             type: data.type
-        });
+        }, { withCredentials: true });
         if(response.status === 200) {
             console.log("User saved successfully")
         }

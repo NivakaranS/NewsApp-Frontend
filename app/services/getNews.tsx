@@ -5,7 +5,9 @@ const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 export async function getNews() {
     try {
-        const response = await axios.get(BASE_URL + '/news');
+        const response = await axios.get(BASE_URL + '/news', {
+            withCredentials: true
+        });
     console.log(response.data);
     return response.data;
     } catch (error) {
@@ -24,7 +26,7 @@ export async function createNews(newsData: any) {
             imageUrl: newsData.imageUrl,
             description: newsData.description
             
-        });
+        },{ withCredentials: true});
         if(response.status === 200) {
             console.log("News saved successfully")
         }
@@ -36,7 +38,9 @@ export async function createNews(newsData: any) {
 
 export async function updateManyNews(newsData: any) {
     try {
-        const response = await axios.post(BASE_URL + '/news/updateAll', newsData);
+        const response = await axios.post(BASE_URL + '/news/updateAll', newsData, {
+            withCredentials: true
+        });
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -46,7 +50,9 @@ export async function updateManyNews(newsData: any) {
 
 export async function updateNewsPriority(id: any) {
     try {
-        const response = await axios.put(BASE_URL + '/news/updatePriority', id);
+        const response = await axios.put(BASE_URL + '/news/updatePriority', id, {
+            withCredentials: true
+        });
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -55,7 +61,7 @@ export async function updateNewsPriority(id: any) {
 }
 
 export async function getNewsById(id: any) {
-    const response = await axios.get(BASE_URL + '/news/' + id);
+    const response = await axios.get(BASE_URL + '/news/' + id, {withCredentials: true});
     console.log(response.data);
     return response.data;
 }
@@ -63,6 +69,8 @@ export async function getNewsById(id: any) {
 export async function getNewsByCategory(category: any) {
     try { const response = await axios.post(BASE_URL + '/news/category/', {
         category: category
+    }, {
+        withCredentials: true
     });
     console.log(response.data);
     return response.data;

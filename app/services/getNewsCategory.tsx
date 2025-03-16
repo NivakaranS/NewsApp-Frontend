@@ -5,7 +5,9 @@ const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 
 export async function getAllNewsCategory() {
-    try { const response = await axios.get(BASE_URL + '/newsCategory/');
+    try { const response = await axios.get(BASE_URL + '/newsCategory/', {
+        withCredentials: true
+    });
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -20,7 +22,7 @@ export async function createNewsCategory(newsCategoryData: any) {
         const response = await axios.post(BASE_URL + '/newsCategory/create', {
             title: newsCategoryData.title,
             imageUrl: newsCategoryData.imageUrl
-        });
+        }, { withCredentials: true });
         if(response.status === 200) {
             console.log("News Category saved successfully")
         }
