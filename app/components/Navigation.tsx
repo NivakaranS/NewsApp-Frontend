@@ -6,16 +6,49 @@ import Search from '../images/search.png';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Chokokutai } from 'next/font/google';
-import {getCookie} from 'cookies-next';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
     const [cookieValue, setCookieValue] = useState<any>(null)
 
     useEffect(() => {
-        setCookieValue(getCookie("session"));
-        console.log(cookieValue)
-    }, []);
+        const parseCookies = () => {
+            const cookiesObj: { [key: string]: string } = {};
+    
+            document.cookie.split(';').forEach(cookie => {
+                const [key, value] = cookie.trim().split('=');
+                cookiesObj[key] = value;
+            })
+    
+            return cookiesObj;
+        }
+        
+
+
+        if(typeof document !== 'undefined') {
+            const cookies = document.cookie;
+            if(cookies == null) {
+                setCookieValue(null)
+            }
+            else {
+                const cookiesObj = parseCookies();
+                setCookieValue(cookiesObj);
+            }
+            console.log(cookies)
+            
+            
+        }
+
+        
+
+    }, [])
+
+    const handleLogout = () => {
+        console.log("Logged out")
+        if(typeof document !== 'undefined') {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+    }
 
     
 
@@ -58,7 +91,7 @@ const Navigation = () => {
 
                         {cookieValue ?
                         <a  href="https://news-app-backend-4rb1.vercel.app/auth/logout">
-                            <div className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
+                            <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
                             </div>
                         </a>
