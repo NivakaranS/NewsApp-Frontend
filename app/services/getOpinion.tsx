@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'https://news-app-backend-4rb1.vercel.app/';
+const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 export async function getOpinion() {
     try {

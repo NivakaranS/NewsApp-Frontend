@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-const BASE_URL = 'https://news-app-backend-4rb1.vercel.app/';
+const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 
 export async function getUsers() {
@@ -18,7 +18,7 @@ export async function getUsers() {
 export async function login(data: any) {
     
     try {
-        const response = await axios.post("http://localhost:5000/users/login", {
+        const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/login", {
             email: data.email,
             password: data.password
         });
