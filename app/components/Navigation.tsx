@@ -6,42 +6,15 @@ import Search from '../images/search.png';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Chokokutai } from 'next/font/google';
+import {getCookie} from 'cookies-next';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
     const [cookieValue, setCookieValue] = useState<any>(null)
 
     useEffect(() => {
-        const parseCookies = () => {
-            const cookiesObj: { [key: string]: string } = {};
-    
-            document.cookie.split(';').forEach(cookie => {
-                const [key, value] = cookie.trim().split('=');
-                cookiesObj[key] = value;
-            })
-    
-            return cookiesObj;
-        }
-        
-
-
-        if(typeof document !== 'undefined') {
-            const cookies = document.cookie;
-            if(cookies == null) {
-                setCookieValue(null)
-            }
-            else {
-                const cookiesObj = parseCookies();
-                setCookieValue(cookiesObj);
-            }
-            console.log(cookies)
-            
-            
-        }
-
-        
-
-    }, [])
+        setCookieValue(getCookie("yourCookieName"));
+    }, []);
 
     
 
