@@ -5,6 +5,7 @@ import React from 'react'
 import { login } from '../services/getUsers'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Login = () => {
 
@@ -75,6 +76,11 @@ const Login = () => {
                         <div onClick={handleLogin} className='bg-gray-800 text-white w-[40%] rounded-[5px] mt-[10px] flex items-center justify-center py-[7px] cursor-pointer'>
                             <p>Login</p>
                         </div>
+                        <a href="https://news-app-backend-4rb1.vercel.app/auth/google">
+                            <div  className='bg-white px-[20px] py-[5px] rounded-[5px] mt-[10px] cursor-pointer'>
+                                <p>Login with Google</p>
+                            </div>
+                        </a>
                     </div>
                     <div className='w-[38.196%] h-[100%] rounded-r-[10px] bg-gray-400  flex flex-col items-center justify-center'>
 
