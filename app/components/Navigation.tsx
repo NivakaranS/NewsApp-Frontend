@@ -1,47 +1,13 @@
 'use client'
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Bell from '../images/bell.png';
 import Search from '../images/search.png';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Chokokutai } from 'next/font/google';
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
-    const [cookieValue, setCookieValue] = useState<any>(null)
-
-    useEffect(() => {
-        const parseCookies = () => {
-            const cookiesObj: { [key: string]: string } = {};
-    
-            document.cookie.split(';').forEach(cookie => {
-                const [key, value] = cookie.trim().split('=');
-                cookiesObj[key] = value;
-            })
-    
-            return cookiesObj;
-        }
-        
-        if(typeof document !== 'undefined') {
-            const cookies = document.cookie;
-            console.log(cookies)
-            
-            const cookiesObj = parseCookies();
-            setCookieValue(cookiesObj);
-        }
-
-        
-
-    }, [])
-
-    
-
-    
-
-    
-    
-
 
     return (
         <nav className='flex h-[14vh] flex-col fixed top-0 w-full z-50'>
@@ -73,17 +39,12 @@ const Navigation = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {cookieValue ?
-                        <div>
-                            <pre>{JSON.stringify(cookieValue, null, 2)}</pre>
-                        </div>
-                        :
+                        
                         <Link href="/login">
                             <div className="bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black">
                                 <p>Login</p>
                             </div>
-                        </Link>}
+                        </Link>
                     </div>
                 </div>
             </div>
