@@ -16,12 +16,16 @@ const Navigation = () => {
             const cookiesObj: { [key: string]: string } = {};
     
             document.cookie.split(';').forEach(cookie => {
-                const [key, value] = cookie.trim().split('=');
-                if(key && value !== undefined) {
-                    cookiesObj[key] = decodeURIComponent(value);
+                const index = cookie.indexOf('=');
+                if (index !== -1) {
+                    const key = cookie.substring(0, index).trim();
+                    const value = decodeURIComponent(cookie.substring(index + 1).trim());
+                    if (key) {
+                        cookiesObj[key] = value;
+                    }
                 }
             });
-    
+
             return cookiesObj;
         }
         
@@ -49,7 +53,7 @@ const Navigation = () => {
             })
 
             document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
-            setCookieValue(null);
+            setTimeout(() => setCookieValue(null), 100);
         } catch(error) {
             console.error("Error in logging out: ", error)
         }
@@ -100,7 +104,7 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {cookieValue ?
+                        {cookieValue && cookieValue.user ?
                         
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
