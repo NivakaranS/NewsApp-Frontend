@@ -76,7 +76,7 @@ const Navigation = () => {
 
                         {cookieValue ?
                         <div>
-                            <pre>{JSON.stringify(cookieValue, null, 2)}</pre>
+                            <pre>{cookieValue}</pre>
                         </div>
                         :
                         <Link href="/login">
