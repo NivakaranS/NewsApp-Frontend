@@ -13,7 +13,7 @@ const Navigation = () => {
     const [cookieValue, setCookieValue] = useState<any>(null)
 
     useEffect(() => {
-        setCookieValue(getCookie("yourCookieName"));
+        setCookieValue(getCookie("session"));
     }, []);
 
     
