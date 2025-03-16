@@ -104,7 +104,7 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {cookieValue && cookieValue.user ?
+                        {cookieValue && cookieValue.session ?
                         
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
