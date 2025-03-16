@@ -5,9 +5,7 @@ const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
 export async function getOpinion() {
     try {
-        const response = await axios.get(BASE_URL + '/opinions', {
-            withCredentials: true
-        });
+        const response = await axios.get(BASE_URL + '/opinions');
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -17,9 +15,7 @@ export async function getOpinion() {
 
 export async function createOpinion() {
     try {
-        const response = await axios.post(BASE_URL + '/opinion', {
-            withCredentials: true
-        });
+        const response = await axios.post(BASE_URL + '/opinion');
         console.log(response.data);
         return response.data;
     } catch (error) {
