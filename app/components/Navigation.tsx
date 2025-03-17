@@ -16,7 +16,7 @@ const Navigation = () => {
         const checkSessionCookie = () => {
             // Check if a session cookie exists (e.g., 'connect.sid' or custom cookie)
             const cookies = document.cookie.split(';');
-            const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('connect.sid=') || cookie.trim().startsWith('user='));
+            const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session='));
             return sessionCookie !== undefined;
           };
         
