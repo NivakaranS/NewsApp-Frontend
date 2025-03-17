@@ -18,10 +18,10 @@ export async function getUsers() {
 export async function login(data: any) {
     
     try {
-        const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/login", {
+        const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
             email: data.email,
             password: data.password
-        });
+        }, {withCredentials: true});
 
         console.log(response.data);
         return response.data;
@@ -34,6 +34,18 @@ export async function login(data: any) {
             return { error: "Network error, please try again" };
         }
     }
+}
+
+export function logout() {
+    axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/logout", {}, {withCredentials: true})
+    .then((response) => {
+        window.location.href = "/";
+        console.log(response.data);
+        return response.data;
+    })
+    .catch((err) => {
+        console.error("Error in logout: ", err);
+    });
 }
 
 export async function createUser(data: any) {
