@@ -47,7 +47,7 @@ const Navigation = () => {
                 withCredentials: true
             }).then(response => {
                 console.log(response.data);
-                window.location.href = "https://news-app-frontend-sigma.vercel.app/";
+                // window.location.href = "https://news-app-frontend-sigma.vercel.app/";
             })
 
             if(typeof document !== 'undefined') {
