@@ -16,26 +16,24 @@ const Navigation = () => {
 
     
 
-    useEffect(() => {
-        const checkSessionCookie = () => {
-            const cookies = parseCookies()
-            console.log('Cookies',cookies);
-            
-            const sessionCookie = cookies.session
-            console.log('Session Cookie', sessionCookie);
-            return sessionCookie !== undefined;
-          };    
-        
 
-
-        if(typeof document !== 'undefined') {
+    const checkSessionCookie = () => {
+        const cookies = parseCookies()
+        console.log('Cookies',cookies);
         
-            const sessionExists = checkSessionCookie()
-            setIsLoggedIn(sessionExists);
-            
-            
-        }
-    }, [])
+        const sessionCookie = cookies.session
+        console.log('Session Cookie', sessionCookie);
+        return sessionCookie !== undefined;
+      };  
+
+    if(typeof document !== 'undefined') {
+        
+        const sessionExists = checkSessionCookie()
+        setIsLoggedIn(sessionExists);
+        
+        
+    }
+    
 
     const handleLogout = async () => {
 
