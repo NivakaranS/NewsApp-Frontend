@@ -14,28 +14,39 @@ export async function getUsers() {
         console.log(error);
     }
 }
-
 export async function login(data: any) {
-    
     try {
         const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
             email: data.email,
             password: data.password
         });
 
-        console.log(response);
-       
+        
+        console.log("Login successful:", response.data);
 
+
+
+       
     } catch (err: any) {
-        console.error("Error in login: ", err);
+        console.error("Error in login:", err);
 
         if (err.response) {
+            
+            console.error("Error response:", err.response.data);
+            console.error("Status code:", err.response.status);
             return { error: "Login failed", details: err.response.data };
-        } else {
+        } else if (err.request) {
+            
+            console.error("No response received:", err.request);
             return { error: "Network error, please try again" };
+        } else {
+            
+            console.error("Unexpected error:", err.message);
+            return { error: "An unexpected error occurred", details: err.message };
         }
     }
 }
+
 
 export function logout() {
     axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/logout", {}, {withCredentials: true})
