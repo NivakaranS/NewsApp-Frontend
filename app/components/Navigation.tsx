@@ -10,31 +10,22 @@ import axios from 'axios';
 const Navigation = () => {
     const [search, setSearch] = useState(false);
     const [cookieValue, setCookieValue] = useState<{[key: string]: string} | null>(null)
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
-        const parseCookies = () => {
-            const cookiesObj: { [key: string]: string } = {};
-    
-            document.cookie.split(';').forEach(cookie => {
-                const index = cookie.indexOf('=');
-                if (index !== -1) {
-                    const key = cookie.substring(0, index).trim();
-                    const value = decodeURIComponent(cookie.substring(index + 1).trim());
-                    if (key) {
-                        cookiesObj[key] = value;
-                    }
-                }
-            });
-
-            return cookiesObj;
-        }
+        const checkSessionCookie = () => {
+            // Check if a session cookie exists (e.g., 'connect.sid' or custom cookie)
+            const cookies = document.cookie.split(';');
+            const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('connect.sid=') || cookie.trim().startsWith('user='));
+            return sessionCookie !== undefined;
+          };
         
 
 
         if(typeof document !== 'undefined') {
         
-            const cookiesObj = parseCookies();
-            setCookieValue(cookiesObj);
+            const sessionExists = checkSessionCookie()
+            setIsLoggedIn(sessionExists);
             
             
         }
@@ -50,11 +41,12 @@ const Navigation = () => {
                 // window.location.href = "https://news-app-frontend-sigma.vercel.app/";
             })
 
-            if(typeof document !== 'undefined') {
+            if (typeof document !== 'undefined') {
                 document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+                document.cookie = "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict"; // Adjust for your cookie name
             }
             
-            setCookieValue(null)
+            setIsLoggedIn(false)
 
         } catch(error) {
             console.error("Error in logging out: ", error)
@@ -106,7 +98,7 @@ const Navigation = () => {
                             </div>
                         </div>
 
-                        {(cookieValue !== null) ?
+                        {(isLoggedIn) ?
                         
                             <div onClick={handleLogout} className='bg-gray-400 py-[5px] px-[20px] cursor-pointer rounded-full text-black'>
                                 <p>Logout</p>
