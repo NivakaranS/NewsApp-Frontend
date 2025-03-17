@@ -19,7 +19,7 @@ export async function login(data: any) {
         const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
             email: data.email,
             password: data.password
-        }, {withCredentials: true});
+        });
 
         
         console.log("Login successful:", response.data);
