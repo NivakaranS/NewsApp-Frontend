@@ -6,21 +6,25 @@ import Search from '../images/search.png';
 import Link from 'next/link';
 import { useState } from 'react';
 import axios from 'axios';
+import { parseCookies } from 'nookies';
+
 
 const Navigation = () => {
     const [search, setSearch] = useState(false);
     const [cookieValue, setCookieValue] = useState<{[key: string]: string} | null>(null)
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+    
+
     useEffect(() => {
         const checkSessionCookie = () => {
-            // Check if a session cookie exists (e.g., 'connect.sid' or custom cookie)
-            console.log('Cookies',document.cookie);
-            const cookies = document.cookie.split(';');
-            const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session='));
+            const cookies = parseCookies()
+            console.log('Cookies',cookies);
+            
+            const sessionCookie = cookies.session
             console.log('Session Cookie', sessionCookie);
             return sessionCookie !== undefined;
-          };
+          };    
         
 
 
