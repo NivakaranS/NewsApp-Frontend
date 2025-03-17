@@ -17,27 +17,19 @@ const Navigation = () => {
     
 
     useEffect(() => {
-        const checkSessionCookie = () => {
-            const cookies = parseCookies();
-            console.log('Cookies:', cookies);
-            
-            const sessionCookie = cookies.session;
-            console.log('Session Cookie:', sessionCookie);
-            return sessionCookie !== undefined;
+        const checkSessionCookie = async () => {
+            try {
+                const response = await axios.get("https://news-app-backend-4rb1.vercel.app/auth/user", {
+                    withCredentials: true
+                })
+                console.log(response.data);
+                setIsLoggedIn(response.data.isAuthenticated);
+            } catch(err) {
+                setIsLoggedIn(false);
+            }
         };
 
-        const checkInterval = setInterval(() => {
-            if (typeof document !== 'undefined') {
-                const sessionExists = checkSessionCookie();
-                if (sessionExists) {
-                    setIsLoggedIn(true);
-                    clearInterval(checkInterval);  // Stop polling once session is found
-                }
-            }
-        }, 300);  // Check every 300ms
-
-        // Cleanup on component unmount
-        return () => clearInterval(checkInterval);
+        checkSessionCookie();
 
     }, []);
 
@@ -51,10 +43,6 @@ const Navigation = () => {
                 // window.location.href = "https://news-app-frontend-sigma.vercel.app/";
             })
 
-            if (typeof document !== 'undefined') {
-                document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
-                document.cookie = "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict"; // Adjust for your cookie name
-            }
             
             setIsLoggedIn(false)
 
