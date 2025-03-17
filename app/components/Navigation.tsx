@@ -16,24 +16,29 @@ const Navigation = () => {
 
     
 
+    useEffect(() => {
+        const checkSessionCookie = () => {
+            const cookies = parseCookies()
+            console.log('Cookies',cookies);
+            
+            const sessionCookie = cookies.session
+            console.log('Session Cookie', sessionCookie);
+            return sessionCookie !== undefined;
+          };    
+        
 
-    const checkSessionCookie = () => {
-        const cookies = parseCookies()
-        console.log('Cookies',cookies);
-        
-        const sessionCookie = cookies.session
-        console.log('Session Cookie', sessionCookie);
-        return sessionCookie !== undefined;
-      };  
 
-    if(typeof document !== 'undefined') {
-        
-        const sessionExists = checkSessionCookie()
-        setIsLoggedIn(sessionExists);
-        
-        
-    }
-    
+          const delayCheck = setTimeout(() => {
+            if (typeof document !== 'undefined') {
+                const sessionExists = checkSessionCookie();
+                setIsLoggedIn(sessionExists);
+            }
+        }, 2000);  // Delay of 500ms (you can adjust this value as needed)
+
+        // Cleanup the timeout if the component is unmounted
+        return () => clearTimeout(delayCheck);
+
+    }, [])
 
     const handleLogout = async () => {
 
