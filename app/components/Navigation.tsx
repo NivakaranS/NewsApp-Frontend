@@ -18,27 +18,28 @@ const Navigation = () => {
 
     useEffect(() => {
         const checkSessionCookie = () => {
-            const cookies = parseCookies()
-            console.log('Cookies',cookies);
+            const cookies = parseCookies();
+            console.log('Cookies:', cookies);
             
-            const sessionCookie = cookies.session
-            console.log('Session Cookie', sessionCookie);
+            const sessionCookie = cookies.session;
+            console.log('Session Cookie:', sessionCookie);
             return sessionCookie !== undefined;
-          };    
-        
+        };
 
-
-          const delayCheck = setTimeout(() => {
+        const checkInterval = setInterval(() => {
             if (typeof document !== 'undefined') {
                 const sessionExists = checkSessionCookie();
-                setIsLoggedIn(sessionExists);
+                if (sessionExists) {
+                    setIsLoggedIn(true);
+                    clearInterval(checkInterval);  // Stop polling once session is found
+                }
             }
-        }, 2000);  // Delay of 500ms (you can adjust this value as needed)
+        }, 300);  // Check every 300ms
 
-        // Cleanup the timeout if the component is unmounted
-        return () => clearTimeout(delayCheck);
+        // Cleanup on component unmount
+        return () => clearInterval(checkInterval);
 
-    }, [])
+    }, []);
 
     const handleLogout = async () => {
 
