@@ -29,7 +29,7 @@ const Login = () => {
                 router.push('/admin')
             }
             else if(response.type == 'user') {
-                router.push('/user')
+                router.push('/')
             }
             
         } catch(err) {
