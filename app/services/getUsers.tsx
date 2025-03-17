@@ -21,10 +21,11 @@ export async function login(data: any) {
         const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
             email: data.email,
             password: data.password
-        }, {withCredentials: true});
+        });
 
-        console.log(response.data);
-        return response.data;
+        console.log(response);
+       
+
     } catch (err: any) {
         console.error("Error in login: ", err);
 

@@ -22,15 +22,8 @@ const Login = () => {
                 password: password
             }
             const response = await login(data);
-            console.log(response.type);
+            console.log(response);
             
-            if(response.type == 'admin') {
-                console.log("Admin here")
-                router.push('/admin')
-            }
-            else if(response.type == 'user') {
-                router.push('/')
-            }
             
         } catch(err) {
             console.error("Error in login: ", err)
