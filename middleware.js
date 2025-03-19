@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const token = req.cookies.get('token'); // Read token from cookies
+  const token = req.cookies.get('session'); // Read token from cookies
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url)); // Redirect to login if no token

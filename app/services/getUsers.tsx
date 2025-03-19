@@ -1,6 +1,9 @@
 
 
 import axios from "axios";
+import { NextResponse } from 'next/server';
+
+
 
 const BASE_URL = 'https://news-app-backend-4rb1.vercel.app';
 
@@ -22,9 +25,13 @@ export async function login(data: any) {
         });
 
         
-        console.log("Login successful:", response.data);
+        console.log("Login successful:", response);
 
-
+        const token = response.data.token; // Read token from cookies
+        
+        if (token.role === "admin") {
+            return NextResponse.redirect(new URL('/admin')); // Redirect to login if no token
+        }
 
        
     } catch (err: any) {
