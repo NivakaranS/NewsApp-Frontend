@@ -19,19 +19,19 @@ export async function getUsers() {
 }
 export async function login(data: any) {
     try {
-        const response = await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
+        await axios.post("https://news-app-backend-4rb1.vercel.app/users/auth/login", {
             email: data.email,
             password: data.password
-        });
+        }, {withCredentials: true})
+        .then((res) => {
+            if(res.data.redirectUrl) {
+                window.location.href = res.data.redirectUrl;
+            }
+        })
 
+        console.log("Login successful");
         
-        console.log("Login successful:", response);
-
-        const token = response.data.token; // Read token from cookies
-        
-        if (token.role === "admin") {
-            return NextResponse.redirect(new URL('/admin')); // Redirect to login if no token
-        }
+       
 
        
     } catch (err: any) {
