@@ -23,11 +23,7 @@ export async function login(data: any) {
             email: data.email,
             password: data.password
         }, {withCredentials: true})
-        .then((res) => {
-            if(res.data.redirectUrl) {
-                window.location.href = res.data.redirectUrl;
-            }
-        })
+        
 
         console.log("Login successful");
         
