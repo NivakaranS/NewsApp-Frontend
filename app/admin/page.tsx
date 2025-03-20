@@ -20,6 +20,7 @@ export default function Home() {
   const [navClick, setNavClick] = useState("User Management");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const Router = useRouter()
+
   useEffect(() => {
     const checkSessionCookie = async () => {
         try {
@@ -30,14 +31,13 @@ export default function Home() {
             setIsLoggedIn(response.data.isAuthenticated);
         } catch(err) {
             setIsLoggedIn(false);
+            Router.push('/login')
         }
     };
 
     checkSessionCookie();
     
-    if(!isLoggedIn) {
-      Router.push('/login')
-    }
+    
 
 }, []);
 
