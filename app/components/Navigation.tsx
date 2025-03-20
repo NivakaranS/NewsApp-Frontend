@@ -36,12 +36,16 @@ const Navigation = () => {
     const handleLogout = async () => {
 
         try {
-            await axios.get("https://news-app-backend-4rb1.vercel.app/auth/logout", {
+            const response = await axios.get("https://news-app-backend-4rb1.vercel.app/auth/logout", {
                 withCredentials: true
-            }).then(response => {
-                console.log(response.data);
-                // window.location.href = "https://news-app-frontend-sigma.vercel.app/";
             })
+            
+            if (response.status === 200) {
+                console.log("Logout successful")
+                setIsLoggedIn(false)
+            } else {
+                console.error("Error in logging out: ", response.data)
+            }
 
             
             setIsLoggedIn(false)
