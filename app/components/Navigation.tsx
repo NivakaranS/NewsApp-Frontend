@@ -36,7 +36,7 @@ const Navigation = () => {
     const handleLogout = async () => {
 
         try {
-            const response = await axios.get("https://news-app-backend-4rb1.vercel.app/auth/logout", {
+            const response = await axios.post("https://news-app-backend-4rb1.vercel.app/auth/logout", {
                 withCredentials: true
             })
             
