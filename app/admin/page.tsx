@@ -12,9 +12,34 @@ import Reservations from "./pages/Reservations";
 import Settings from "./pages/Settings";
 import Message from "./pages/Message";
 import Parking from "./pages/Parking"
+import axios from "axios";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [navClick, setNavClick] = useState("User Management");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const Router = useRouter()
+  useEffect(() => {
+    const checkSessionCookie = async () => {
+        try {
+            const response = await axios.get("https://news-app-backend-4rb1.vercel.app/auth/user", {
+                withCredentials: true
+            })
+            console.log(response.data);
+            setIsLoggedIn(response.data.isAuthenticated);
+        } catch(err) {
+            setIsLoggedIn(false);
+        }
+    };
+
+    checkSessionCookie();
+    
+    if(!isLoggedIn) {
+      Router.push('/login')
+    }
+
+}, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     setNavClick((e.target as HTMLElement).innerText);
